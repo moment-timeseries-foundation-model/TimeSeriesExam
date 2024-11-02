@@ -10,7 +10,7 @@
 </div>
 
 ## 🔥 News 
-- 🔥🔥 TimeSeriesExam was accepted to NeurIPS'24 Time Series in the Age of Large Models Workshop as a spotlight paper!
+- 🔥🔥 (Oct'24) `TimeSeriesExam` was accepted to to the NeurIPS'24 Workshop on [Foundation Models for Time Series: Exploring New Frontiers](https://sites.google.com/corp/view/fm4ts/home), and ICAIF'24 Workshop on [Time Series in the Age of Large Models](https://neurips-time-series-workshop.github.io/) as a spotlight papers!
 
 </div>
 
