@@ -5,7 +5,7 @@
 [![preprint](https://img.shields.io/static/v1?label=arXiv&message=2410.14752&color=B31B1B&logo=arXiv)](https://arxiv.org/abs/2410.14752)
 [![huggingface](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-FFD21E)](https://huggingface.co/datasets/AutonLab/TimeSeriesExam1)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue)](https://opensource.org/license/MIT)
-[![Python: 3.11](https://img.shields.io/badge/Python-3.11-blue)]()
+[![Python: 3.12](https://img.shields.io/badge/Python-3.11-blue)]()
 
 </div>
 
@@ -27,20 +27,30 @@ Figure. 1: Accuracy of latest LLMs on the `TimeSeriesExam.` Closed-source LLMs o
 
 ## 🧑‍💻 Running evaluation
 
-Step 1: Install Envrionment and Library
-```python
-conda create -n "ts_exam" python=3.12.0
-conda activate ts_exam
-pip install -r requirements.txt
+#### Step 1: Install Envrionment and Library
+This step ensures you have the necessary tools and libraries to run the evaluation scripts. 
+
+These commands create a new conda environment named ts_exam with Python 3.12.0, activate the newly created environment, and install the required libraries listed in the `requirements.txt` file using pip:
+
+```bash
+> conda create -n "ts_exam" python=3.12.0
+> conda activate ts_exam
+> pip install -r requirements.txt
 ```
 
-Step 2: (Required for closed-source model): Add your api key to environment
-It would be the best practice to follow guidance [here](https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety)
+#### Step 2: API Key for Closed-Source Models (Optional)
+If you're using a closed-source model like GPT-4, you'll need an API key to interact with its service. Here are some security best practices to follow when managing your API key:
+- _Store Securely_: Don't embed your API key directly in the code or scripts. Consider using environment variables or secure credential management tools.
+- _Minimize Exposure_: Limit who has access to your API key and avoid sharing it publicly.
+- _Monitor Usage_: Keep track of API key usage to identify any suspicious activity.
 
-Step 3:
-There are two evaluation bash scripts provided. To evaluate the dataset, run the corresponding
-```python
-sh evaluate/evaluate_file_name.sh
+We recommend that you refer to the best practices outlined in [OpenAI's documentation](https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety).
+
+#### Step 3: Running the Evaluation Scripts
+This inference repository uses two  bash scripts located in the `evaluate` directory for evaluating datasets. To run a specific evaluation script, navigate to the project directory in your terminal and execute the following command, replacing `evaluate_file_name.sh` with the actual script name: 
+
+```bash
+> sh evaluate/evaluate_file_name.sh
 ```
 
 </div>
