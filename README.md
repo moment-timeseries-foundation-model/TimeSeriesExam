@@ -46,24 +46,37 @@ sh evaluate/evaluate_file_name.sh
 </div>
 
 ## 🧑‍🏫 Evaluation Config
-- data_file_path: path to .json file for qa dataset
-- model_name: Current support list of model are
-    - "gpt-4o-mini"
-    - "gpt-4o"
-    - "claude-3-5-sonnet-20240620"
-    - "gemini-1.5-pro"
-    - "openbmb/MiniCPM-V-2_6"
-    - "microsoft/Phi-3.5-vision-instruct"
-    - "microsoft/Phi-3.5-mini-instruct"
-- seed: random seed
-- max_tokens: max new tokens for generation
-- temperature
-- output_file_path: path to save the .json file to record result
-- image_cache_dir: needed only for image models, as images are plotted and saved during inference
-- ts_tokenizer_name: choose from 'image' or 'plain_text'
-- add_question_hint: a flag if added, feeds a question hint to model
-- add_concepts: a flag if added, feeds a list of relevant concepts to model
-- add_examples: a flag if added, feeds example time series illustrated in concepts to model (need to have add_concepts enabled for this)
+
+#### Data
+- `data_file_path` (string): Path to the JSON file containing the QA dataset.
+
+#### Model
+- `model_name` (string): The model to evaluate.
+
+> [!NOTE] 
+> We currently support 4 closed-source and 3 open-weight models:
+> - OpenAI's [GPT-4o mini](https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/) ("gpt-4o-mini") and [GPT-4o](https://openai.com/index/hello-gpt-4o/) ("gpt-4o"), 
+> - Anthropic's [Claude 3.5 Sonnet](https://www.anthropic.com/news/claude-3-5-sonnet) ("claude-3-5-sonnet-20240620"), 
+> - Google's [Gemini-1.5 Pro](https://deepmind.google/technologies/gemini/pro/) ("gemini-1.5-pro"), 
+> - OpenBMB's [MiniCPM-V 2.6](https://huggingface.co/openbmb/MiniCPM-V-2_6) ("openbmb/MiniCPM-V-2_6"), and 
+> - Microsoft's [Phi-3.5-vision](https://huggingface.co/microsoft/Phi-3.5-vision-instruct) ("microsoft/Phi-3.5-vision-instruct") and [Phi-3.5-mini](https://huggingface.co/microsoft/Phi-3.5-mini-instruct) ("microsoft/Phi-3.5-mini-instruct") 
+
+#### Generation
+- `seed` (integer): Random seed to control randomness during generation.
+- `max_tokens` (integer): Maximum number of new tokens the model can generate for the answer.
+- `temperature` (float): Controls the randomness of the generated text. Higher values lead to more surprising outputs.
+
+#### Output
+- `output_file_path` (string): Path to the JSON file where the results will be saved.
+
+#### Model Specific Options (applicable for image models only)
+- `image_cache_dir` (string, optional): Path to a directory where intermediate images generated during inference will be saved.
+
+#### Additional Inputs (Optional)
+- `ts_tokenizer_name` (string, optional): Choose between 'image' or 'plain_text' depending on the input data format. Defaults to 'plain_text'.
+- `add_question_hint` (boolean, optional): If True, a question hint will be provided to the model as additional context.
+- `add_concepts` (boolean, optional): If True, a list of relevant concepts will be provided to the model as additional context.
+- `add_examples` (boolean, optional): If True and `add_concepts` is also True, example time series illustrating the concepts will be provided to the model.
 
 </div>
 
