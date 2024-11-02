@@ -100,5 +100,5 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 See [MIT LICENSE](LICENSE) for details.
 
-<img align="right" height ="120px" src="assets/cmu_logo.png">
-<img align="right" height ="110px" src="assets/autonlab_logo.png">
+<img align="right" height ="120px" src="asset/cmu_logo.png">
+<img align="right" height ="110px" src="asset/autonlab_logo.png">
