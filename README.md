@@ -1,5 +1,5 @@
 <div align="center">
-<img width="60%" alt="MOMENT" src="assets/MOMENT Logo.png">
+<img width="60%" alt="MOMENT" src="asset/MOMENT Logo.png">
 <h1>TimeSeriesExam: A Time Series Understanding Exam</h1>
 
 [![preprint](https://img.shields.io/static/v1?label=arXiv&message=2410.14752&color=B31B1B&logo=arXiv)](https://arxiv.org/abs/2410.14752)
@@ -17,7 +17,11 @@
 ## 📖Introduction
 Large Language Models (LLMs) have recently demonstrated a remarkable ability to model time series data. These capabilities can be partly explained if LLMs understand basic time series concepts. However, our knowledge of what these models understand about time series data remains relatively limited. To address this gap, we introduce TimeSeriesExam, a configurable and scalable multiple-choice question exam designed to assess LLMs across five core time series understanding categories: pattern recognition, noise understanding, similarity analysis, anomaly detection, and causality analysis.
 
-![](asset/spider.png)
+<div align="center">
+<img width="40%" alt="Spider plot of performance of latest LLMs on the TimeSeriesExam" src="asset/spider.png">
+
+Figure. 1: Accuracy of latest LLMs on the `TimeSeriesExam.` Closed-source LLMs outperform open-source ones in simple understanding tasks, but most models struggle with complex reasoning tasks.
+</div>
 
 </div>
 
