@@ -1,20 +1,27 @@
+<div align="center">
+<img width="60%" alt="MOMENT" src="assets/MOMENT Logo.png">
 <h1>TimeSeriesExam: A Time Series Understanding Exam</h1>
 
+[![preprint](https://img.shields.io/static/v1?label=arXiv&message=2410.14752&color=B31B1B&logo=arXiv)](https://arxiv.org/abs/2410.14752)
+[![huggingface](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-FFD21E)](https://huggingface.co/datasets/AutonLab/TimeSeriesExam1)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue)](https://opensource.org/license/MIT)
+[![Python: 3.11](https://img.shields.io/badge/Python-3.11-blue)]()
+
 </div>
 
-## News 
-- TimeSeriesExam was accepted to NeurIPS'24 Time Series in the Age of Large Models Workshop as a spotlight paper!
+## 🔥 News 
+- 🔥🔥 TimeSeriesExam was accepted to NeurIPS'24 Time Series in the Age of Large Models Workshop as a spotlight paper!
 
 </div>
 
-## Introduction
+## 📖Introduction
 Large Language Models (LLMs) have recently demonstrated a remarkable ability to model time series data. These capabilities can be partly explained if LLMs understand basic time series concepts. However, our knowledge of what these models understand about time series data remains relatively limited. To address this gap, we introduce TimeSeriesExam, a configurable and scalable multiple-choice question exam designed to assess LLMs across five core time series understanding categories: pattern recognition, noise understanding, similarity analysis, anomaly detection, and causality analysis.
 
 ![](asset/spider.png)
 
 </div>
 
-## Running evaluation
+## 🧑‍💻 Running evaluation
 
 Step 1: Install Envrionment and Library
 ```python
@@ -34,7 +41,7 @@ sh evaluate/evaluate_file_name.sh
 
 </div>
 
-## Evaluation Config
+## 🧑‍🏫 Evaluation Config
 - data_file_path: path to .json file for qa dataset
 - model_name: Current support list of model are
     - "gpt-4o-mini"
@@ -77,7 +84,7 @@ If you find this work helpful, please consider citing our paper:
 
 ```bibtex
 @article{cai2024timeseriesexam,
-  title={TimeSeriesExam: A time series understanding exam},
+  title={{TimeSeriesExam: A Time Series Understanding Exam}},
   author={Cai, Yifu and Choudhry, Arjun and Goswami, Mononito and Dubrawski, Artur},
   journal={arXiv preprint arXiv:2410.14752},
   year={2024}
