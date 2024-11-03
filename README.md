@@ -126,11 +126,10 @@ To integrate a new model, follow these steps:
 If you find this work helpful, please consider citing our paper:
 
 ```bibtex
-@article{cai2024timeseriesexam,
-  title={{TimeSeriesExam: A Time Series Understanding Exam}},
+@inproceedings{caitimeseriesexam,
+  title={TimeSeriesExam: A Time Series Understanding Exam},
   author={Cai, Yifu and Choudhry, Arjun and Goswami, Mononito and Dubrawski, Artur},
-  journal={arXiv preprint arXiv:2410.14752},
-  year={2024}
+  booktitle={NeurIPS Workshop on Time Series in the Age of Large Models}
 }
 ```
 
