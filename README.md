@@ -22,14 +22,14 @@ Large Language Models (LLMs) have recently demonstrated a remarkable ability to 
 
 Figure. 1: Accuracy of latest LLMs on the `TimeSeriesExam.` Closed-source LLMs outperform open-source ones in simple understanding tasks, but most models struggle with complex reasoning tasks.
 
+</div>
+
 Time series in the dataset are created from a combination of diverse baseline Time series objects. The baseline objects cover linear/non-linear signals and cyclic patterns. 
 
 <div align="center">
 <img width="40%" alt="time series curation pipeline" src="asset/Time_Series_Curation_Pipeline.png">
 
 Figure. 2: The pipeline enables diversity by combining different components to create numerous synthetic time series with varying properties.
-
-</div>
 
 </div>
 
