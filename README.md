@@ -21,6 +21,14 @@ Large Language Models (LLMs) have recently demonstrated a remarkable ability to 
 <img width="40%" alt="Spider plot of performance of latest LLMs on the TimeSeriesExam" src="asset/spider.png">
 
 Figure. 1: Accuracy of latest LLMs on the `TimeSeriesExam.` Closed-source LLMs outperform open-source ones in simple understanding tasks, but most models struggle with complex reasoning tasks.
+
+Time series in the dataset are created from a combination of diverse baseline Time series objects. The baseline objects cover linear/non-linear signals and cyclic patterns. 
+
+<div align="center">
+<img width="40%" alt="Spider plot of performance of latest LLMs on the TimeSeriesExam" src="asset/Time_Series_Curation_Pipeline.pdf">
+
+Figure. 2: The pipeline enables diversity by combining different components to create numerous synthetic time series with varying properties.
+
 </div>
 
 </div>
@@ -57,8 +65,15 @@ This inference repository uses two  bash scripts located in the `evaluate` direc
 
 ## 🧑‍🏫 Evaluation Config
 
+We provide description for hyperparameters that can be changed for evaluation. You can set them in the bash file provided above. 
+
 #### Data
 - `data_file_path` (string): Path to the JSON file containing the QA dataset.
+- We provide dataset created after each round of improvement. In the paper we primarily evaluated the last round dataset (round 3). These datasets are put under
+
+```
+output/round_idx_folder/qa_dataset.json
+```
 
 #### Model
 - `model_name` (string): The model to evaluate.
@@ -90,19 +105,20 @@ This inference repository uses two  bash scripts located in the `evaluate` direc
 
 </div>
 
-## Adding your own model
+## Adding Your Own Model
 
-Step 1: Register its information in bolded global variable add 
-```
-evaluate/llm_api.py
-```
+To integrate a new model, follow these steps:
 
-Step 2: Define the query and format function like already defined ones in 
+### Step 1: Define Query and Format Functions
+- Open `evaluate/evaluation_utils.py`.
+- Define custom `query` and `format` functions for your model, following the structure of the existing functions in this file. These functions determine how queries are sent to the model and how responses are formatted for evaluation.
 
-```
-evaluate/evaluation_utils.py
-```
 
+### Step 2: Register Model Information
+- Go to the file `evaluate/llm_api.py`.
+- Import the `query` and `format` functions from `evaluate/evaluation_utils.py`
+- Add the model’s details to the specified **global variable** in this file. This step registers your model so it can be accessed and used within the system.
+  
 </div>
 
 ## Citation
