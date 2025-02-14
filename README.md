@@ -33,7 +33,7 @@ Figure. 2: The pipeline enables diversity by combining different components to c
 
 </div>
 
-## 🧑‍💻 Running evaluation
+## 🧑‍💻 Running Exam Generation
 
 #### Step 1: Install Envrionment and Library
 This step ensures you have the necessary tools and libraries to run the evaluation scripts. 
@@ -46,78 +46,62 @@ These commands create a new conda environment named ts_exam with Python 3.12.0, 
 > pip install -r requirements.txt
 ```
 
-#### Step 2: API Key for Closed-Source Models (Optional)
-If you're using a closed-source model like GPT-4, you'll need an API key to interact with its service. Here are some security best practices to follow when managing your API key:
-- _Store Securely_: Don't embed your API key directly in the code or scripts. Consider using environment variables or secure credential management tools.
-- _Minimize Exposure_: Limit who has access to your API key and avoid sharing it publicly.
-- _Monitor Usage_: Keep track of API key usage to identify any suspicious activity.
+#### Step 2: Set up generation config
+There are several hyper-parameters for exam generation 
+- **`num_questions_per_option`**: number of qa samples to create from each option
+- **`ts_length`**: length of generated time series
+- **`output_file`**: path to the generated file
 
-We recommend that you refer to the best practices outlined in [OpenAI's documentation](https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety).
-
-#### Step 3: Running the Evaluation Scripts
-This inference repository uses two  bash scripts located in the `evaluate` directory for evaluating datasets. To run a specific evaluation script, navigate to the project directory in your terminal and execute the following command, replacing `evaluate_file_name.sh` with the actual script name: 
+We provide an example script to generate the exam 
 
 ```bash
-> sh evaluate/evaluate_file_name.sh
+> sh run.sh
 ```
 
 </div>
 
-## 🧑‍🏫 Evaluation Config
+## 🧑‍🏫 File structure
 
-We provide description for hyperparameters that can be changed for evaluation. You can set them in the bash file provided above. 
+We provide description for important components in the generation pipeline to faciliate future research. 
 
-#### Data
-- `data_file_path` (string): Path to the JSON file containing the QA dataset.
-- We provide dataset created after each round of improvement. In the paper we primarily evaluated the last round dataset (round 3). These datasets are put under
+#### Baseline Time Series Objects
+-  **`time series objects`**: All the baseline objects are stored under `timeseries_curation/timeseries_object.py`. Each of them has a `generate` method that samples from the object given length. 
+-  **`transformations`**: transformations are appleid on a generated time series. They are stored under `timeseries_curation/transformation.py`
+-  **`composition modules`**: composition modules combine multiple time series objects together. They are stored under `timeseries_curation/composer.py`. Each of them has a `generate` method that samples from the object given length. 
 
-```
-output/round_idx_folder/qa_dataset.json
-```
+#### Question Templates
 
-#### Model
-- `model_name` (string): The model to evaluate.
+We add a short description of important elements in the template below 
+- **`question`**: The template’s main question (string).  
+- **`options`**: A list of `Option` objects defining the corresponding time series to generate.  
+- **`relevant_concepts`**: Related concepts, which must exist in the `CONCEPT` dictionary.  
+- **`question_hint`**: A hint to guide the approach to the question. 
 
-> [!NOTE] 
-> We currently support 4 closed-source and 3 open-weight models:
-> - OpenAI's [GPT-4o mini](https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/) ("gpt-4o-mini") and [GPT-4o](https://openai.com/index/hello-gpt-4o/) ("gpt-4o"), 
-> - Anthropic's [Claude 3.5 Sonnet](https://www.anthropic.com/news/claude-3-5-sonnet) ("claude-3-5-sonnet-20240620"), 
-> - Google's [Gemini-1.5 Pro](https://deepmind.google/technologies/gemini/pro/) ("gemini-1.5-pro"), 
-> - OpenBMB's [MiniCPM-V 2.6](https://huggingface.co/openbmb/MiniCPM-V-2_6) ("openbmb/MiniCPM-V-2_6"), and 
-> - Microsoft's [Phi-3.5-vision](https://huggingface.co/microsoft/Phi-3.5-vision-instruct) ("microsoft/Phi-3.5-vision-instruct") and [Phi-3.5-mini](https://huggingface.co/microsoft/Phi-3.5-mini-instruct) ("microsoft/Phi-3.5-mini-instruct") 
+#### Options
+
+There are three main types of options that TimeSeriesExam uses. Their definition are stored in `utils/utils.py`
+
+- **`single time series option`**: used to generate a single time series
+- **`two time series option`**: used to generate a pair of config-independent time series
+- **`paired time series option`**: used to generate a pair of config-dependent time series (such as lagged or granger pairs)
 
 #### Generation
-- `seed` (integer): Random seed to control randomness during generation.
-- `max_tokens` (integer): Maximum number of new tokens the model can generate for the answer.
-- `temperature` (float): Controls the randomness of the generated text. Higher values lead to more surprising outputs.
 
-#### Output
-- `output_file_path` (string): Path to the JSON file where the results will be saved.
-
-#### Model Specific Options (applicable for image models only)
-- `image_cache_dir` (string, optional): Path to a directory where intermediate images generated during inference will be saved.
-
-#### Additional Inputs (Optional)
-- `ts_tokenizer_name` (string, optional): Choose between 'image' or 'plain_text' depending on the input data format. Defaults to 'plain_text'.
-- `add_question_hint` (boolean, optional): If True, a question hint will be provided to the model as additional context.
-- `add_concepts` (boolean, optional): If True, a list of relevant concepts will be provided to the model as additional context.
-- `add_examples` (boolean, optional): If True and `add_concepts` is also True, example time series illustrating the concepts will be provided to the model.
+Generation is done under `main.py`. Each template is sampled pre-defined number of times to generate the actual dataset. 
 
 </div>
 
-## Adding Your Own Model
+## Adding Your Own Template
 
-To integrate a new model, follow these steps:
+To add a template to TimeSeriesExam, please consider the following steps
 
-### Step 1: Define Query and Format Functions
-- Open `evaluate/evaluation_utils.py`.
-- Define custom `query` and `format` functions for your model, following the structure of the existing functions in this file. These functions determine how queries are sent to the model and how responses are formatted for evaluation.
+### Step 1: Define new baseline objects (Optional)
+- Open corresponding object file under `timeseries_curation/`. For example, to add a new composition module, add it under `timeseries_curation/composer.py`
 
-
-### Step 2: Register Model Information
-- Go to the file `evaluate/llm_api.py`.
-- Import the `query` and `format` functions from `evaluate/evaluation_utils.py`
-- Add the model’s details to the specified **global variable** in this file. This step registers your model so it can be accessed and used within the system.
+### Step 2: Add template 
+- Go to the file `question_template.py`.
+- Import the new time series object (if added in Step 1)
+- Create your template following the previous example. 
   
 </div>
 
